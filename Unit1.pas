@@ -130,20 +130,19 @@ end;
 procedure EventListener(event: integer);cdecl;
 begin
 case event of
-0:
-begin
-form1.Memo1.Lines.Add('Auth success');
-ClearServers();
-in_serverlist:=false;
-ZLO_GetVersion(2);
-end;
 2:begin form1.Memo1.Lines.Add('Old Launcher.dll');form1.Button1.Enabled:=false;form1.UpdateTimer.Enabled:=true;end;
 29:form1.Memo1.Lines.Add('Server connected');
 30:form1.Memo1.Lines.Add('Server auth success');
 31:form1.Memo1.Lines.Add('Server auth error');
 32:begin form1.Memo1.Lines.Add('Disconnected from master, will reconnect in 5sec');form1.button1.Enabled:=true;ClearServers();form1.ReconnectTimer.Enabled:=true;end;
 33:form1.Memo1.Lines.Add('Master timeout and disconnected');
-34:form1.Memo1.Lines.Add('Dll check ok');
+34:
+begin
+form1.Memo1.Lines.Add('Dll check ok');
+ClearServers();
+in_serverlist:=false;
+ZLO_GetVersion(2);
+end;
 35:form1.Memo1.Lines.Add('Server disconnected');
 else
 form1.Memo1.Lines.Add('Event: ' + inttostr(event));
